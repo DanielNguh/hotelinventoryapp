@@ -1,0 +1,31 @@
+<!-- <<h2>Welcome to {{ hotelName }}</h2> -->
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+<hinv-header></hinv-header>
+
+<div [hidden]="hideRooms">
+  Number of Rooms:
+  <div
+    [innerText]="numberOfRooms"
+    [ngStyle]="{ color: rooms.availableRooms ? 'green' : 'red' }"
+  ></div>
+</div>
+
+{{ rooms?.availableRooms ?? "No rooms" }}
+<!-- {{ roomList | json}} -->
+<div *ngIf="selectedRoom">
+{{ selectedRoom | json }}
+</div>
+
+<div>
+  <button (click)="addRoom()" class="btn btn-primary">Add Room</button>
+</div>
+<!-- Testing out ngOnDestroy  rooms.availableRooms-->
+<div *ngIf="hideRooms">
+  <hinv-rooms-list
+    [rooms]="roomList"
+    [title]="title"
+    (selectedRoom)="selectRoom($event)"
+  ></hinv-rooms-list>
+</div>
+<button class="btn btn-primary" (click)="toggle()">Toggle</button>
