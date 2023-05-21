@@ -1,0 +1,14 @@
+<form #loginForm="ngForm">
+  <div class="form-group">
+    <input #emailTemp="ngModel" hinvEmailValidator hinvHover="green" type="email" name="username" [(ngModel)]="email" placeholder="Email" class="form-control"/>
+    <div *ngIf="emailTemp.errors">
+      {{emailTemp.errors | json}}
+    </div>
+  </div>
+  <div class="form-group">
+    <input hinvHover="steelblue" type="text" name="password" [(ngModel)]="password" placeholder="Password" class="form-control">
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="login()">Log in</button>
+  </div>
+</form>

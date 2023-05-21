@@ -1,8 +1,8 @@
 <!-- <<h2>Welcome to {{ hotelName }}</h2> -->
 <hinv-header></hinv-header>
-<hinv-header></hinv-header>
-<hinv-header></hinv-header>
-
+<!-- <hinv-header></hinv-header>
+<hinv-header></hinv-header> -->
+<!-- {{ room$ | async | json}} -->
 <div [hidden]="hideRooms">
   Number of Rooms:
   <div
@@ -18,14 +18,23 @@
 </div>
 
 <div>
-  <button (click)="addRoom()" class="btn btn-primary">Add Room</button>
+  <button routerLink="add" class="btn btn-primary">Add Room</button>
 </div>
 <!-- Testing out ngOnDestroy  rooms.availableRooms-->
-<div *ngIf="hideRooms">
+<h2>
+  <!-- {{getError$ | async}} -->
+  Number of Rooms {{roomsCount$ | async}}
+</h2>
+<div *ngIf="room$ | async as rooms">
   <hinv-rooms-list
-    [rooms]="roomList"
+    [rooms]="rooms"
     [title]="title"
     (selectedRoom)="selectRoom($event)"
   ></hinv-rooms-list>
 </div>
 <button class="btn btn-primary" (click)="toggle()">Toggle</button>
+<button class="btn btn-primary" (click)="editRoom()">Edit</button>
+<button class="btn btn-primary" (click)="deleteRoom()">Delete</button>
+
+<h1>{{totalBytes}} loaded</h1>
+<router-outlet></router-outlet>
