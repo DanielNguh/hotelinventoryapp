@@ -14,6 +14,7 @@ import { RoomsService } from './services/rooms.service';
 import { Observable, Subject, Subscription, catchError, of, map } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { ConfigService } from '../services/config.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'hinv-rooms',
@@ -47,7 +48,7 @@ export class RoomsComponent
 
   subscription!: Subscription;
 
-  error$ = new Subject<string>;
+  error$ = new Subject<string>();
 
   getError$ = this.error$.asObservable();
 
@@ -59,16 +60,18 @@ export class RoomsComponent
     })
   );
 
-  roomsCount$ = this.roomsService.getRooms$.pipe(
-    map((rooms) => rooms.length)
-  );
+  priceFilter = new FormControl(0);
+  roomsCount$ = this.roomsService.getRooms$.pipe(map((rooms) => rooms.length));
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
   @ViewChildren(HeaderComponent)
   headerChildrenComponent!: QueryList<HeaderComponent>;
 
-  constructor(private roomsService: RoomsService, private config: ConfigService) {}
+  constructor(
+    private roomsService: RoomsService,
+    private config: ConfigService
+  ) {}
 
   ngOnInit(): void {
     this.roomsService.getPhotos().subscribe((event) => {
@@ -105,7 +108,7 @@ export class RoomsComponent
 
   // }
   ngAfterViewInit(): void {
-    this.headerComponent.title = 'Rooms View';
+    // this.headerComponent.title = 'Rooms View';
     this.headerChildrenComponent.forEach((element) => {
       element.title = 'Testing All';
     });

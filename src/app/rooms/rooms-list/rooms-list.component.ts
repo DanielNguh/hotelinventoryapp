@@ -15,12 +15,14 @@ import { RoomList } from '../rooms';
   selector: 'hinv-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() rooms: RoomList[] | null= [];
+  @Input() rooms!: RoomList[];
 
   @Input() title: string = '';
+
+  @Input() price: number = 0;
 
   @Output() selectedRoom = new EventEmitter<RoomList>();
 

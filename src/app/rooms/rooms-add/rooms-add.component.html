@@ -2,11 +2,11 @@
   {{ successMessage }}
 </div>
 
-{{ roomsForm.pristine | json }}
+<!-- {{ roomsForm.pristine | json }}
 {{ roomsForm.dirty | json }}
 {{ roomsForm.valid | json }}
 {{ roomsForm.invalid | json }}
-{{ roomsForm.value | json }}
+{{ roomsForm.value | json }} -->
 
 <form #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)">
   <div class="form-group">
@@ -17,6 +17,7 @@
       name="roomType"
       [(ngModel)]="room.roomType"
       placeholder="Room Type"
+      [ngModelOptions]="{updateOn: 'blur'}"
     />
   </div>
   <div class="alert alert-danger" *ngIf="roomType.dirty && roomType.errors?.['required']">

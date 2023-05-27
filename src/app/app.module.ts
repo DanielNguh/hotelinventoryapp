@@ -1,9 +1,8 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContainerComponent } from './container/container.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
 import { RequestInterceptor } from './request.interceptor';
@@ -22,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailValidatorDirective } from './emailValidator/email-validator.directive';
 import { RouteConfigToken } from './services/routeConfig.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { RoomsModule } from './rooms/rooms.module';
 
 function initFactory(initService: InitService) {
@@ -35,13 +35,12 @@ function initFactory(initService: InitService) {
     NotfoundComponent,
     LoginComponent,
     HoverDirective,
-    EmailValidatorDirective
+    EmailValidatorDirective,
   ],
   imports: [
     BrowserModule,
     // RoomsModule,
     AppRoutingModule,
-    NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
     LayoutModule,
@@ -51,28 +50,29 @@ function initFactory(initService: InitService) {
     MatIconModule,
     MatListModule,
     FormsModule,
-    ],
+    MatSnackBarModule,
+  ],
   providers: [
     {
       provide: APP_SERVICE_CONFIG,
-      useValue: APP_CONFIG
+      useValue: APP_CONFIG,
     },
     {
       provide: RouteConfigToken,
-      useValue: { title: 'Home'}
+      useValue: { title: 'Home' },
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: APP_INITIALIZER,
       useFactory: initFactory,
       multi: true,
       deps: [InitService],
-    }
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
