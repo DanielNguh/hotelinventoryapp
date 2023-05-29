@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { BookingGuard } from './booking.guard';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('BookingGuard', () => {
   let guard: BookingGuard;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [MatSnackBarModule],
+    });
     guard = TestBed.inject(BookingGuard);
   });
 
